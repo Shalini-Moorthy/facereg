@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>signup</title>
+
+<style>
+body {
+background-size: cover;
+
+}
+h1{
+color: #ffffff;
+}
+label{
+color: #ffffff;
+}
+.class0{
+text-align:center;
+}
+.class1{
+background-color:#40848d;
+text-align:center;
+margin:auto;
+width:30%;
+height:60%;
+padding :20px;
+border:10px solid black;
+}
+</style>
+</head>
+<body background="{{url_for('static',filename='builtin/sotprojectbg.png')}}">
+<div class="class0">
+    <h1>Register</h1>
+</div>
+<div class="class1">
+<form action="/form_signupdetails" method="post">
+    <label>Name</label>
+<input type="text" placeholder="username" name="username"></br></br>
+  <label>Username</label>
+<input type="email" placeholder="Email ID" name="email"></br></br>
+<label>Password</label>
+<input type="password" placeholder="Password" name="password"></br></br>
+  <input type="submit" value="Sign-Up">
+</form>
+</div>
+</body>
+</html>

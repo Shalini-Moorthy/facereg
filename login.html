@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <style>
+body {
+background-size: cover;
+
+}
+h1{
+color: #ffffff;
+}
+label{
+color: #ffffff;
+}
+.class0{
+text-align:center;
+text-color: #ffffff;
+}
+.class1{
+background-color:#40848d;
+text-align:center;
+margin:auto;
+width:30%;
+height:60%;
+padding :20px;
+border:10px solid black;
+}
+</style>
+</head>
+<body background="{{url_for('static',filename='builtin/sotprojectbg.png')}}">
+<div class="class0">
+<h1>Secure Online Transaction Using Face Recognition</h1>
+</div>
+<div class="class1">
+
+<form action="/form_welcome" method="post">
+    <h1>Login</h1>
+    <p>{{message}}</p>
+  <label>Email</label>
+<input type="email" placeholder="Email ID" name="email"></br></br>
+<label>Password</label>
+<input type="password" placeholder="Password" name="password"></br></br>
+  <input type="submit" value="Login here">
+</form>
+
+<form action="/form_gotosignup" method="post">
+  <p>New user?</p>
+  <input type="submit" value="Sign-Up here">
+</form>
+</div>
+</body>
+</html></html>

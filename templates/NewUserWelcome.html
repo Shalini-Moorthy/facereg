@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p{
+        font-size: 90px;
+        Text-align:center;
+        color: #ffffff;
+        }
+    </style>
+</head>
+<body background="{{url_for('static',filename='builtin/sotprojectbg.png')}}">
+
+<p>Hi {{name}} we need your images</p>
+<form action="/form_collectsampless" method="post">
+
+  <input type="submit" value="Click here to collect samples">
+</form>
+</body>
+</html>
