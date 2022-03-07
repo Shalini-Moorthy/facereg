@@ -2,8 +2,9 @@ import cv2
 import numpy as np
 from os import listdir
 from os.path import isfile , join
-def trainfun():
-    data_path='C:/Users/shalini/Desktop/sotproject/faces/'
+
+def trainfun(ID):
+    data_path='C:/Users/shalini/Desktop/sotproject/faces/UserID'+str(ID)+'/'
 
     onlyfiles=[f for f in listdir(data_path) if isfile(join(data_path,f))]
     training_data,labels=[],[]
@@ -15,5 +16,5 @@ def trainfun():
     labels=np.asarray(labels,dtype=np.int32)
     model=cv2.face.LBPHFaceRecognizer_create()
     model.train(np.asarray(training_data),np.asarray(labels))
-    model.save('C:/Users/shalini/Desktop/sotproject/models/model'+str(1)+'.yml')
+    model.save('C:/Users/shalini/Desktop/sotproject/models/model'+str(ID)+'.yml')
     print("Model Training Complete")

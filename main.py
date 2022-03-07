@@ -4,7 +4,7 @@ import cv2
 import collectsample
 import recognizer
 import train
-
+UserID=3
 connection=pymysql.connect(host="localhost",user="root",port=3306,password="root",db="secureot",cursorclass=pymysql.cursors.DictCursor)
 app=Flask(__name__)
 @app.route('/')
@@ -55,6 +55,18 @@ def insertDetailsIntoDB():
 
             sqlQuery = "insert into userdetails (name,email,password) VALUES (%s,%s,%s)"
             cursor.execute(sqlQuery, ( name,email, password))
+            sqlQuerys = "select * from userdetails"
+            cursor.execute(sqlQuerys)
+            result = cursor.fetchall()
+            emaillist = []
+            for i in result:
+                emaillist.append(i['email'])
+            print(emaillist)
+
+            if email in emaillist:
+                a = emaillist.index(email)
+                UserID = result[a]['id']
+                print(UserID)
             connection.commit()
     finally:
         connection.close()
@@ -62,15 +74,21 @@ def insertDetailsIntoDB():
     return render_template("NewUserWelcome.html",name=name)
 @app.route('/form_collectsampless',methods=['post','get'])
 def collectt():
-    collectsample.collect()
-    train.trainfun()
+
+    collectsample.collect(42)
+    train.trainfun(42)
     return render_template("MessageSampleCollected.html")
 @app.route('/form_gotowelcomepage',methods=['post','get'])
 def backtowelcome():
     return render_template("Welcome.html")
 @app.route('/form_recognition',methods=['post','get'])
 def recognition():
-    recognizer.recognize()
+    confidence=recognizer.recognize(42)
+    if confidence>75:
+        return render_template("recognized.html")
+    else:
+        return render_template("notrecognized.html")
+
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
