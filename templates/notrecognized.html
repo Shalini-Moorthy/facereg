@@ -6,11 +6,13 @@
 </head>
 <body>
 <center>
-    <p>Your face has not been recognized</p>
+    <h3>Your face has not been recognized !</h3>
+    <img src="{{url_for('static',filename='builtin/failed.jpg')}}">
     <form action="/form_recognizeagain" method="post">
 
   <input type="submit" value="Try again">
 </form>
+
 </center>
 </body>
 </html>
