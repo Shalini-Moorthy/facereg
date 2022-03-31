@@ -3,6 +3,7 @@ import pymysql.cursors
 import cv2
 import collectsample
 import recognizer
+import sendMail
 import train
 UserID=3
 connection=pymysql.connect(host="localhost",user="root",port=3306,password="root",db="secureot",cursorclass=pymysql.cursors.DictCursor)
@@ -75,21 +76,25 @@ def insertDetailsIntoDB():
 @app.route('/form_collectsampless',methods=['post','get'])
 def collectt():
 
-    collectsample.collect(42)
-    train.trainfun(42)
+    collectsample.collect(43)
+    train.trainfun(43)
     return render_template("MessageSampleCollected.html")
 @app.route('/form_gotowelcomepage',methods=['post','get'])
 def backtowelcome():
     return render_template("Welcome.html")
 @app.route('/form_recognition',methods=['post','get'])
 def recognition():
-    confidence=recognizer.recognize(42)
-    if confidence>75:
+    confidence=recognizer.recognize(43)
+    if confidence>80:
+        sendMail.email_alert('shalini1152001@gmail.com','yes')
         return render_template("recognized.html")
     else:
+        sendMail.email_alert('shalini1152001@gmail.com','no')
         return render_template("notrecognized.html")
 
-
+@app.route('/form_recognizeagain',methods=['post','get'])
+def tryagain():
+    return render_template("welcome.html")
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
