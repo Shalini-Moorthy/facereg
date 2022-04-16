@@ -3,7 +3,7 @@ from email.message import EmailMessage
 def email_alert(to,result):
     subject=""
     body=""
-    if result=='yes':
+    if result=='no':
         subject="Alert: Face not recognized"
         body="Someone is trying to initiate a transaction and it has not been recognized as you. If it wasn't you kindly take necessary steps"
     else:

@@ -5,7 +5,9 @@ import collectsample
 import recognizer
 import sendMail
 import train
-UserID=3
+import user
+import fisherrecognizer
+
 connection=pymysql.connect(host="localhost",user="root",port=3306,password="root",db="secureot",cursorclass=pymysql.cursors.DictCursor)
 app=Flask(__name__)
 @app.route('/')
@@ -32,7 +34,9 @@ def welcome():
             print(emaillist,a,result[a]['password'],result[a]['email'])
             name=result[a]['name']
             if password==result[a]['password']:
-
+               UserID = result[a]['id']
+               print(UserID)
+               
                return render_template("Welcome.html",name=name)
                connection.close()
             else:
@@ -46,11 +50,16 @@ def welcome():
 def signup():
     return render_template("SignUp.html")
 
+@app.route('/form_gobacktologin',methods=['post','get'])
+def loginn():
+    return render_template("login.html")
+
 @app.route('/form_signupdetails',methods=['post','get'])
 def insertDetailsIntoDB():
     name= request.form['username']
     email=request.form['email']
     password=request.form['password']
+
     try:
         with connection.cursor() as cursor:
 
@@ -75,17 +84,18 @@ def insertDetailsIntoDB():
     return render_template("NewUserWelcome.html",name=name)
 @app.route('/form_collectsampless',methods=['post','get'])
 def collectt():
-
-    collectsample.collect(43)
-    train.trainfun(43)
+    collectsample.collect(49)
+    train.trainfun(49)
     return render_template("MessageSampleCollected.html")
 @app.route('/form_gotowelcomepage',methods=['post','get'])
 def backtowelcome():
     return render_template("Welcome.html")
 @app.route('/form_recognition',methods=['post','get'])
 def recognition():
-    confidence=recognizer.recognize(43)
-    if confidence>80:
+    confidence=recognizer.recognize(49)
+    fisherconfidence = fisherrecognizer.recognize(49)
+    print(fisherconfidence)
+    if fisherconfidence<3500 and confidence>80:
         sendMail.email_alert('shalini1152001@gmail.com','yes')
         return render_template("recognized.html")
     else:

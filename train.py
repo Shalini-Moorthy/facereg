@@ -17,4 +17,10 @@ def trainfun(ID):
     model=cv2.face.LBPHFaceRecognizer_create()
     model.train(np.asarray(training_data),np.asarray(labels))
     model.save('C:/Users/shalini/Desktop/sotproject/models/model'+str(ID)+'.yml')
-    print("Model Training Complete")
+    print("Model Training Completed using LBPH")
+
+    model=cv2.face.FisherFaceRecognizer_create()
+    model.train(np.asarray(training_data),np.asarray(labels))
+    model.save('C:/Users/shalini/Desktop/sotproject/fishermodels/model'+str(ID)+'.yml')
+
+    print("Model Training Complete using fisher faces")
